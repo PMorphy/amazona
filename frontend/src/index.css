@@ -8,12 +8,36 @@ body {
 }
 
 header {
-  background-color: #070707;
-  color: white;
-  padding: 1rem;
+  background-color: #474747;
+  padding: 1rem 2rem;
 }
 
 header a {
   text-decoration: none;
   font-weight: bold;
+  color: white;
+}
+
+main {
+  padding: 1rem;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.product {
+  border: 1px solid #404040;
+  margin: 1rem;
+}
+
+.product img {
+  width: 100%;
+  max-width: 400px;
+}
+
+.product-info {
+  padding: 1rem;
 }
