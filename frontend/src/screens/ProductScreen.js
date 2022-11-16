@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useReducer, useEffect, useContext } from 'react';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -31,6 +31,7 @@ const reducer = (state, action) => {
 };
 
 const ProductScreen = () => {
+  const navigate = useNavigate();
   const { slug } = useParams();
   const [{ loading, product, error }, dispatch] = useReducer(reducer, {
     loading: true,
@@ -52,12 +53,25 @@ const ProductScreen = () => {
     fetchProducts();
   }, [slug]);
 
-  const { dispatch: ctxDispatch } = useContext(Store);
-  const addToCartHandler = () => {
+  const {
+    state: { cart },
+    dispatch: ctxDispatch
+  } = useContext(Store);
+  const addToCartHandler = async () => {
+    const itemExists = cart.cartItems.find((item) => item._id === product._id);
+    const quantity = itemExists ? itemExists.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert('Oops.  Product is out of stock.');
+      return;
+    }
+
     ctxDispatch({
       type: 'CART_ADD_ITEM',
-      payload: { ...product, quantity: 1 }
+      payload: { ...product, quantity }
     });
+
+    navigate('/cart');
   };
 
   return loading ? (

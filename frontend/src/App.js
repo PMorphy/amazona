@@ -9,12 +9,15 @@ import Badge from 'react-bootstrap/Badge';
 
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 import { Store } from './Store';
 
 function App() {
-  const { state } = useContext(Store);
-  const { cart } = state;
+  const {
+    state: { cart }
+  } = useContext(Store);
+
   return (
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>
@@ -29,7 +32,10 @@ function App() {
                   Cart
                   {cart.cartItems.length > 0 && (
                     <Badge pill bg='danger'>
-                      {cart.cartItems.length}
+                      {cart.cartItems.reduce(
+                        (total, item) => total + item.quantity,
+                        0
+                      )}
                     </Badge>
                   )}
                 </Link>
@@ -41,6 +47,7 @@ function App() {
           <Container>
             <Routes>
               <Route path='/' element={<HomeScreen />} />
+              <Route path='/cart' element={<CartScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>
