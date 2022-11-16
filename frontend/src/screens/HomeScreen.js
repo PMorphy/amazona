@@ -6,6 +6,8 @@ import Row from 'react-bootstrap/Row';
 import axios from 'axios';
 
 import Product from '../components/Product';
+import LoadingBox from '../components/LoadingBox';
+import MessageBox from '../components/MessageBox';
 
 const reducer = (state, action) => {
   const { type, payload } = action;
@@ -14,7 +16,7 @@ const reducer = (state, action) => {
       return { ...state, loading: true };
     case 'FETCH_SUCCESS':
       return { ...state, loading: false, products: payload };
-    case 'FETC_FAIL':
+    case 'FETCH_FAIL':
       return { ...state, loading: false, error: payload };
     default:
       return state;
@@ -35,6 +37,7 @@ const HomeScreen = () => {
         const res = await axios('/api/products');
         dispatch({ type: 'FETCH_SUCCESS', payload: res.data });
       } catch (error) {
+        console.log(error);
         dispatch({ type: 'FETCH_FAIL', payload: error.message });
       }
     };
@@ -49,9 +52,9 @@ const HomeScreen = () => {
       <h1>Featured Products</h1>
       <div className='products'>
         {loading ? (
-          <div>Loading...</div>
+          <LoadingBox />
         ) : error ? (
-          <div>{error}</div>
+          <MessageBox variant='danger'>{error}</MessageBox>
         ) : (
           <Row>
             {products.map((product) => (
