@@ -10,6 +10,7 @@ import Badge from 'react-bootstrap/Badge';
 import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
+import SigninScreen from './screens/SigninScreen';
 
 import { Store } from './Store';
 
@@ -48,6 +49,7 @@ function App() {
             <Routes>
               <Route path='/' element={<HomeScreen />} />
               <Route path='/cart' element={<CartScreen />} />
+              <Route path='/signin' element={<SigninScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>
