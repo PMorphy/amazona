@@ -1,27 +1,42 @@
 import express from 'express';
-const app = express();
-import data from './data.js';
+import dotenv from 'dotenv';
+import colors from 'colors';
+import connectDB from './config/db.js';
 
+// import data from './data.js';
+
+import seedRouter from './routes/seedRoutes.js';
+import productRouter from './routes/productRoutes.js';
+import userRouter from './routes/userRoutes.js';
+
+// Support
+dotenv.config();
+colors.enable();
+
+// app Object
+const app = express();
+
+// Cross Platform
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Port assignment
 const PORT = process.env.PORT || 5000;
 
-app.get('/api/products', (req, res) => {
-  res.send(data.products);
+// DB Connect
+connectDB();
+
+// Routes
+app.use('/api/seed', seedRouter);
+app.use('/api/products', productRouter);
+app.use('/api/users', userRouter);
+
+// Async Error Handler
+app.use((error, req, res, next) => {
+  res.status(500).send({ message: error.message });
 });
 
-app.get('/api/products/slug/:slug', (req, res) => {
-  const { slug } = req.params;
-  const product = data.products.find((product) => product.slug === slug);
-  if (product) res.send(product);
-  else res.status(404).send({ message: 'Product not found' });
-});
-
-app.get('/api/products/:id', (req, res) => {
-  const { id } = req.params;
-  const product = data.products.find((product) => product._id === id);
-  if (product) res.send(product);
-  else res.status(404).send({ message: 'Product not found' });
-});
-
+// Server Listening
 app.listen(PORT, () => {
   console.log(`Server Started on: http://localhost:${PORT}`);
 });
