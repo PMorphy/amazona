@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -6,8 +6,9 @@ import Button from 'react-bootstrap/Button';
 import { Helmet } from 'react-helmet-async';
 import { Link, useLocation } from 'react-router-dom';
 import axios from 'axios';
-
 import { Store } from '../Store.js';
+import { toast } from 'react-toastify';
+import { getError } from '../util.js';
 
 const SigninScreen = () => {
   const navigate = useNavigate();
@@ -18,7 +19,10 @@ const SigninScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const { state, dispatch } = useContext(Store);
+  const {
+    state: { userInfo },
+    dispatch
+  } = useContext(Store);
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
@@ -33,9 +37,15 @@ const SigninScreen = () => {
       localStorage.setItem('userInfo', JSON.stringify(data));
       navigate(redirect || '/');
     } catch (error) {
-      alert('Invalid Credentials');
+      toast.error(getError(error));
     }
   };
+
+  useEffect(() => {
+    if (userInfo) {
+      navigate(redirect);
+    }
+  }, [navigate, redirect, userInfo]);
 
   return (
     <Container className='small-container'>
