@@ -14,8 +14,10 @@ import HomeScreen from './screens/HomeScreen';
 import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
+import ShippingAddressScreen from './screens/ShippingAddressScreen';
 
 import { Store } from './Store';
+import SignupScreen from './screens/signupScreen';
 
 function App() {
   const {
@@ -24,8 +26,12 @@ function App() {
   } = useContext(Store);
 
   const onSignoutHandler = () => {
-    dispatch({ type: 'USER_SIGNOUT' });
+    dispatch({ type: 'USER_SIGN_OUT' });
     localStorage.removeItem('userInfo');
+    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('cartItems');
+
+    window.location.href = '/signin';
   };
 
   return (
@@ -82,6 +88,8 @@ function App() {
               <Route path='/' element={<HomeScreen />} />
               <Route path='/cart' element={<CartScreen />} />
               <Route path='/signin' element={<SigninScreen />} />
+              <Route path='/signup' element={<SignupScreen />} />
+              <Route path='/shipping' element={<ShippingAddressScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>

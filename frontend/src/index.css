@@ -2,6 +2,8 @@
   --black: #404040;
   --gold: #ffc000;
   --golden-rod: #f0c040;
+  --orange: #f08000;
+  --grey: #a0a0a0;
 }
 
 body {
@@ -65,4 +67,14 @@ main {
 
 .small-container {
   max-width: 600px;
+}
+
+.checkout-steps > div {
+  border-bottom: 0.2rem solid var(--grey);
+  color: var(--grey);
+}
+
+.checkout-steps > div.active {
+  border-bottom: 0.2rem solid var(--orange);
+  color: var(--orange);
 }
