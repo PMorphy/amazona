@@ -15,9 +15,10 @@ import ProductScreen from './screens/ProductScreen';
 import CartScreen from './screens/CartScreen';
 import SigninScreen from './screens/SigninScreen';
 import ShippingAddressScreen from './screens/ShippingAddressScreen';
+import SignupScreen from './screens/signupScreen';
+import PaymentMethodScreen from './screens/PaymentMethodScreen';
 
 import { Store } from './Store';
-import SignupScreen from './screens/signupScreen';
 
 function App() {
   const {
@@ -29,6 +30,8 @@ function App() {
     dispatch({ type: 'USER_SIGN_OUT' });
     localStorage.removeItem('userInfo');
     localStorage.removeItem('shippingAddress');
+    localStorage.removeItem('paymentMethod');
+
     localStorage.removeItem('cartItems');
 
     window.location.href = '/signin';
@@ -90,6 +93,7 @@ function App() {
               <Route path='/signin' element={<SigninScreen />} />
               <Route path='/signup' element={<SignupScreen />} />
               <Route path='/shipping' element={<ShippingAddressScreen />} />
+              <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>
