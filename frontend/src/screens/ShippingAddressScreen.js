@@ -18,7 +18,9 @@ const ShippingAddressScreen = () => {
   const [fullName, setFullName] = useState(shippingAddress.fullName || '');
   const [address, setAddress] = useState(shippingAddress.address || '');
   const [city, setCity] = useState(shippingAddress.city || '');
-  const [postal, setPostal] = useState(shippingAddress.postal || '');
+  const [postalCode, setPostalCode] = useState(
+    shippingAddress.postalCode || ''
+  );
   const [country, setCountry] = useState(shippingAddress.country || '');
 
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ const ShippingAddressScreen = () => {
         fullName,
         address,
         city,
-        postal,
+        postalCode,
         country
       }
     });
@@ -41,7 +43,7 @@ const ShippingAddressScreen = () => {
         fullName,
         address,
         city,
-        postal,
+        postalCode,
         country
       })
     );
@@ -88,11 +90,11 @@ const ShippingAddressScreen = () => {
               required
             />
           </Form.Group>
-          <Form.Group className='mb-3' controlId='postal'>
+          <Form.Group className='mb-3' controlId='postalCode'>
             <Form.Label>Postal Code</Form.Label>
             <Form.Control
-              value={postal}
-              onChange={(e) => setPostal(e.target.value)}
+              value={postalCode}
+              onChange={(e) => setPostalCode(e.target.value)}
               required
             />
           </Form.Group>

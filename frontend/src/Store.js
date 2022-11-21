@@ -44,6 +44,8 @@ const reducer = (state, action) => {
 
       return { ...state, cart: { ...state.cart, cartItems } };
     }
+    case 'CART_CLEAR':
+      return { ...state, cart: { ...state.cart, cartItems: [] } };
 
     case 'USER_SIGN_IN':
       return { ...state, userInfo: payload };

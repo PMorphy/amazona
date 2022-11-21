@@ -8,6 +8,7 @@ import connectDB from './config/db.js';
 import seedRouter from './routes/seedRoutes.js';
 import productRouter from './routes/productRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import orderRouter from './routes/orderRoutes.js';
 
 // Support
 dotenv.config();
@@ -30,6 +31,7 @@ connectDB();
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);
 app.use('/api/users', userRouter);
+app.use('/api/orders', orderRouter);
 
 // Async Error Handler
 app.use((error, req, res, next) => {
