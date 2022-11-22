@@ -27,6 +27,11 @@ const PORT = process.env.PORT || 5000;
 // DB Connect
 connectDB();
 
+// PAYPAL
+app.get('/api/keys/paypal', (req, res) => {
+  res.send(process.env.PAYPAL_CLIENT_ID || 'sb');
+});
+
 // Routes
 app.use('/api/seed', seedRouter);
 app.use('/api/products', productRouter);

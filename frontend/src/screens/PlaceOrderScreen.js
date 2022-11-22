@@ -32,7 +32,7 @@ const PlaceOrderScreen = () => {
     loading: false
   });
 
-  const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { dispatch: ctxDispatch } = useContext(Store);
   const navigate = useNavigate();
   const {
     state: {
