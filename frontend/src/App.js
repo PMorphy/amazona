@@ -21,6 +21,7 @@ import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 
 import { Store } from './Store';
+import { OrderHistoryScreen } from './screens/OrderHistoryScreen';
 
 function App() {
   const {
@@ -43,47 +44,50 @@ function App() {
     <BrowserRouter>
       <div className='d-flex flex-column site-container'>
         <ToastContainer position='bottom-center' limit={1} />
-        <header className='App-header'>
-          <Navbar bg='dark' variant='dark'>
+        <header>
+          <Navbar bg='dark' variant='dark' expand='lg'>
             <Container>
               <LinkContainer to='/'>
                 <Navbar.Brand>Amazona</Navbar.Brand>
               </LinkContainer>
-              <Nav className='me-auto'>
-                <Link to='/cart' className='nav-link'>
-                  Cart
-                  {cart.cartItems.length > 0 && (
-                    <Badge pill bg='danger'>
-                      {cart.cartItems.reduce(
-                        (total, item) => total + item.quantity,
-                        0
-                      )}
-                    </Badge>
-                  )}
-                </Link>
-                {userInfo ? (
-                  <NavDropdown title={userInfo.name} id='basic-nav-dropdown'>
-                    <LinkContainer to='/profile'>
-                      <NavDropdown.Item>User Profile</NavDropdown.Item>
-                    </LinkContainer>
-                    <LinkContainer to='orderhistory'>
-                      <NavDropdown.Item>Order History</NavDropdown.Item>
-                    </LinkContainer>
-                    <NavDropdown.Divider />
-                    <Link
-                      to='#signout'
-                      className='dropdown-item'
-                      onClick={onSignoutHandler}
-                    >
-                      Sign Out
-                    </Link>
-                  </NavDropdown>
-                ) : (
-                  <Link to='/signin' className='nav-link'>
-                    Sign In
+              <Navbar.Toggle aria-controls='basic-navbar-nav' />
+              <Navbar.Collapse id='basic-navbar-nav'>
+                <Nav className='me-auto w-100 justify-content-end'>
+                  <Link to='/cart' className='nav-link'>
+                    Cart
+                    {cart.cartItems.length > 0 && (
+                      <Badge pill bg='danger'>
+                        {cart.cartItems.reduce(
+                          (total, item) => total + item.quantity,
+                          0
+                        )}
+                      </Badge>
+                    )}
                   </Link>
-                )}
-              </Nav>
+                  {userInfo ? (
+                    <NavDropdown title={userInfo.name} id='basic-nav-dropdown'>
+                      <LinkContainer to='/profile'>
+                        <NavDropdown.Item>User Profile</NavDropdown.Item>
+                      </LinkContainer>
+                      <LinkContainer to='/orderhistory'>
+                        <NavDropdown.Item>Order History</NavDropdown.Item>
+                      </LinkContainer>
+                      <NavDropdown.Divider />
+                      <Link
+                        to='#signout'
+                        className='dropdown-item'
+                        onClick={onSignoutHandler}
+                      >
+                        Sign Out
+                      </Link>
+                    </NavDropdown>
+                  ) : (
+                    <Link to='/signin' className='nav-link'>
+                      Sign In
+                    </Link>
+                  )}
+                </Nav>
+              </Navbar.Collapse>
             </Container>
           </Navbar>
         </header>
@@ -98,12 +102,13 @@ function App() {
               <Route path='/payment' element={<PaymentMethodScreen />} />
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
+              <Route path='/orderhistory' element={<OrderHistoryScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>
         </main>
         <footer>
-          <div className='text-center'>All rights reserved &copy;</div>
+          <div className='text-center mt-auto'>All rights reserved &copy;</div>
         </footer>
       </div>
     </BrowserRouter>
