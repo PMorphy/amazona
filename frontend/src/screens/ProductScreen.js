@@ -82,7 +82,11 @@ const ProductScreen = () => {
     <div>
       <Row>
         <Col md={6}>
-          <img className='img-large' src={product.image} alt={product.name} />
+          <img
+            className='img-large img-fluid'
+            src={product.image}
+            alt={product.name}
+          />
         </Col>
         <Col md={3}>
           <ListGroup variant='flush'>
@@ -95,7 +99,7 @@ const ProductScreen = () => {
             <ListGroup.Item>
               <Rating rating={product.rating} numReviews={product.numReviews} />
             </ListGroup.Item>
-            <ListGroup.Item>Price: {product.price}</ListGroup.Item>
+            <ListGroup.Item>Price: ${product.price}</ListGroup.Item>
             <ListGroup.Item>
               Description: <p>{product.description}</p>
             </ListGroup.Item>

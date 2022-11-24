@@ -1,4 +1,4 @@
-const Rating = ({ rating, numReviews }) => {
+const Rating = ({ rating, numReviews, caption }) => {
   return (
     <div className='rating'>
       <span>
@@ -8,7 +8,7 @@ const Rating = ({ rating, numReviews }) => {
               ? 'fas fa-star'
               : rating >= 0.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         />
       </span>
@@ -19,7 +19,7 @@ const Rating = ({ rating, numReviews }) => {
               ? 'fas fa-star'
               : rating >= 1.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         />
       </span>
@@ -30,7 +30,7 @@ const Rating = ({ rating, numReviews }) => {
               ? 'fas fa-star'
               : rating >= 2.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         />
       </span>
@@ -41,22 +41,26 @@ const Rating = ({ rating, numReviews }) => {
               ? 'fas fa-star'
               : rating >= 3.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         />
       </span>
       <span>
         <i
           className={
-            rating === 5
+            rating >= 5
               ? 'fas fa-star'
               : rating >= 4.5
               ? 'fas fa-star-half-alt'
-              : 'fas fa-star'
+              : 'far fa-star'
           }
         />
       </span>
-      <span className='num-reviews'> {numReviews} Review</span>
+      {caption ? (
+        <span>{caption}</span>
+      ) : (
+        <span>{' ' + numReviews + ' reviews'}</span>
+      )}
     </div>
   );
 };
