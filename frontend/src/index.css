@@ -37,7 +37,8 @@ main {
   color: var(--black);
 }
 
-.btn-primary {
+.btn-primary,
+.btn-outline-primary {
   background-color: var(--golden-rod);
   color: var(--black);
   font-weight: bold;
@@ -79,6 +80,7 @@ main {
   color: var(--orange);
 }
 
-.table {
-  max-width: 100vw;
+.nav-brand {
+  font-weight: bold;
+  margin-left: 20px;
 }

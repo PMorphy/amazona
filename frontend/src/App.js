@@ -19,10 +19,13 @@ import SignupScreen from './screens/signupScreen';
 import PaymentMethodScreen from './screens/PaymentMethodScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
+import SideMenu from './components/SideMenu';
 
 import { Store } from './Store';
 import { OrderHistoryScreen } from './screens/OrderHistoryScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import SearchBox from './components/SearchBox';
+import SearchScreen from './screens/SearchScreen';
 
 function App() {
   const {
@@ -48,11 +51,13 @@ function App() {
         <header>
           <Navbar bg='dark' variant='dark' expand='lg'>
             <Container>
+              <SideMenu placement='start' />
               <LinkContainer to='/'>
-                <Navbar.Brand>Amazona</Navbar.Brand>
+                <Navbar.Brand className='nav-brand'>Amazona</Navbar.Brand>
               </LinkContainer>
               <Navbar.Toggle aria-controls='basic-navbar-nav' />
               <Navbar.Collapse id='basic-navbar-nav'>
+                <SearchBox />
                 <Nav className='me-auto w-100 justify-content-end'>
                   <Link to='/cart' className='nav-link'>
                     Cart
@@ -105,6 +110,7 @@ function App() {
               <Route path='/placeorder' element={<PlaceOrderScreen />} />
               <Route path='/order/:id' element={<OrderScreen />} />
               <Route path='/orderhistory' element={<OrderHistoryScreen />} />
+              <Route path='/search' element={<SearchScreen />} />
               <Route path='/product/:slug' element={<ProductScreen />} />
             </Routes>
           </Container>

@@ -1,5 +1,6 @@
-import React, { useContext, useReducer, useState } from 'react';
+import React, { useContext, useReducer, useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useNavigate } from 'react-router-dom';
 
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -22,17 +23,18 @@ const reducer = (state, action) => {
 };
 
 const ProfileScreen = () => {
+  const navigate = useNavigate();
   const {
     state: { userInfo },
     dispatch: ctxDispatch
   } = useContext(Store);
 
-  const [name, setName] = useState(userInfo.name);
-  const [email, setEmail] = useState(userInfo.email);
+  const [name, setName] = useState(userInfo?.name);
+  const [email, setEmail] = useState(userInfo?.email);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const [dispatch] = useReducer(reducer, {
+  const [{}, dispatch] = useReducer(reducer, {
     loadingUpdate: false,
     error: ''
   });
@@ -62,6 +64,13 @@ const ProfileScreen = () => {
       toast.error(getError(error));
     }
   };
+
+  useEffect(() => {
+    if (!userInfo) {
+      navigate('/signin');
+    }
+  }, [userInfo, navigate]);
+
   return (
     <div className='container small-container'>
       <Helmet>

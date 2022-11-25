@@ -45,8 +45,12 @@ export const OrderHistoryScreen = () => {
       }
     };
 
-    fetchData();
-  }, [userInfo]);
+    if (!userInfo) {
+      navigate('/signin');
+    } else {
+      fetchData();
+    }
+  }, [userInfo, navigate]);
 
   return (
     <div className='my-3'>
@@ -59,7 +63,7 @@ export const OrderHistoryScreen = () => {
       ) : error ? (
         <MessageBox variant='danger'>{error}</MessageBox>
       ) : (
-        <table className='table'>
+        <table className='table img-fluid'>
           <thead>
             <tr>
               <th>ID</th>
